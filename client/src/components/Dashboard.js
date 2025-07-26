@@ -1,27 +1,37 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import {
-  CircularProgress,
   Snackbar,
   Alert,
   Typography,
-  MenuItem,
-  Select,
-  InputLabel,
-  FormControl,
-  Tooltip,
   Switch,
   FormControlLabel,
   CssBaseline,
   useMediaQuery,
+  Box,
+  Fab,
+  Zoom,
 } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import FilterListIcon from '@mui/icons-material/FilterList';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import PieChartIcon from '@mui/icons-material/PieChart';
+import TrendingUpIcon from '@mui/icons-material/TrendingUp';
+import AssessmentIcon from '@mui/icons-material/Assessment';
+import DataUsageIcon from '@mui/icons-material/DataUsage';
+import TimelineIcon from '@mui/icons-material/Timeline';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+
+// Import new components
+import StatsCard from './StatsCard';
+import LoadingSpinner from './LoadingSpinner';
+import FilterPanel from './FilterPanel';
+import ChartContainer from './ChartContainer';
+import DataTable from './DataTable';
+import AdvancedCharts from './AdvancedCharts';
+
 import '../styles/Dashboard.css';
-
-
 
 const useNetworkStatus = () => {
   const [isOffline, setIsOffline] = useState(!navigator.onLine);
@@ -53,16 +63,20 @@ const Dashboard = () => {
   const isOffline = useNetworkStatus();
   const [offlineOpen, setOfflineOpen] = useState(isOffline);
   const [slowConnection, setSlowConnection] = useState(false);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const [endYear, setEndYear] = useState('');
-  const [topic, setTopic] = useState('');
-  const [sector, setSector] = useState('');
-  const [region, setRegion] = useState('');
-  const [pest, setPest] = useState('');
-  const [source, setSource] = useState('');
-  const [swot, setSwot] = useState('');
-  const [country, setCountry] = useState('');
-  const [city, setCity] = useState('');
+  // Consolidated filters state
+  const [filters, setFilters] = useState({
+    endYear: '',
+    topic: '',
+    sector: '',
+    region: '',
+    pest: '',
+    source: '',
+    swot: '',
+    country: '',
+    city: '',
+  });
 
   const fetchData = async () => {
     const startTime = Date.now();
@@ -89,17 +103,33 @@ const Dashboard = () => {
     }
   };
 
-  
-useEffect(() => {
-  fetchData();
-  document.body.className = themeMode; // Add this line
-}, [themeMode]);
+  useEffect(() => {
+    fetchData();
+    document.body.className = themeMode;
+  }, [themeMode]);
 
   useEffect(() => {
     if (isOffline) {
       setOfflineOpen(true);
     }
   }, [isOffline]);
+
+  // Scroll to top functionality
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.pageYOffset > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
@@ -121,21 +151,44 @@ useEffect(() => {
 
   const applyFilters = () => {
     let filtered = data;
-    if (endYear) filtered = filtered.filter(item => new Date(item.published).getFullYear() === parseInt(endYear));
-    if (topic) filtered = filtered.filter(item => item.topic === topic);
-    if (sector) filtered = filtered.filter(item => item.sector === sector);
-    if (region) filtered = filtered.filter(item => item.region === region);
-    if (pest) filtered = filtered.filter(item => item.pest === pest);
-    if (source) filtered = filtered.filter(item => item.source === source);
-    if (swot) filtered = filtered.filter(item => item.swot === swot);
-    if (country) filtered = filtered.filter(item => item.country === country);
-    if (city) filtered = filtered.filter(item => item.city === city);
+    
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value) {
+        if (key === 'endYear') {
+          filtered = filtered.filter(item => new Date(item.published).getFullYear() === parseInt(value));
+        } else {
+          filtered = filtered.filter(item => item[key] === value);
+        }
+      }
+    });
+    
     setFilteredData(filtered);
   };
 
   useEffect(() => {
     applyFilters();
-  }, [endYear, topic, sector, region, pest, source, swot, country, city]);
+  }, [filters, data]);
+
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => ({
+      ...prev,
+      [key]: value
+    }));
+  };
+
+  const handleClearFilters = () => {
+    setFilters({
+      endYear: '',
+      topic: '',
+      sector: '',
+      region: '',
+      pest: '',
+      source: '',
+      swot: '',
+      country: '',
+      city: '',
+    });
+  };
 
   const handleThemeChange = () => {
     setThemeMode(prevMode => (prevMode === 'light' ? 'dark' : 'light'));
@@ -144,19 +197,104 @@ useEffect(() => {
   const theme = createTheme({
     palette: {
       mode: themeMode,
+      primary: {
+        main: themeMode === 'dark' ? '#60a5fa' : '#3b82f6',
+      },
+      secondary: {
+        main: themeMode === 'dark' ? '#a78bfa' : '#8b5cf6',
+      },
+      background: {
+        default: themeMode === 'dark' ? '#0f172a' : '#f8fafc',
+        paper: themeMode === 'dark' ? 'rgba(51, 65, 85, 0.6)' : 'rgba(255, 255, 255, 0.9)',
+      },
+      text: {
+        primary: themeMode === 'dark' ? '#f1f5f9' : '#1e293b',
+        secondary: themeMode === 'dark' ? '#94a3b8' : '#64748b',
+      },
     },
+    typography: {
+      fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif',
+      h1: {
+        fontWeight: 700,
+      },
+      h2: {
+        fontWeight: 600,
+      },
+      h4: {
+        fontWeight: 600,
+      },
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: 12,
+            textTransform: 'none',
+            fontWeight: 500,
+          },
+        },
+      },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            borderRadius: 16,
+            backdropFilter: 'blur(16px)',
+          },
+        },
+      },
+    },
+  });
+
+  // Calculate statistics
+  const getStatistics = () => {
+    const totalRecords = filteredData.length;
+    const avgIntensity = filteredData.length > 0 
+      ? (filteredData.reduce((sum, item) => sum + (item.intensity || 0), 0) / filteredData.length).toFixed(1)
+      : 0;
+    const avgLikelihood = filteredData.length > 0
+      ? (filteredData.reduce((sum, item) => sum + (item.likelihood || 0), 0) / filteredData.length).toFixed(1)
+      : 0;
+    const avgRelevance = filteredData.length > 0
+      ? (filteredData.reduce((sum, item) => sum + (item.relevance || 0), 0) / filteredData.length).toFixed(1)
+      : 0;
+
+    return { totalRecords, avgIntensity, avgLikelihood, avgRelevance };
+  };
+
+  const statistics = getStatistics();
+
+  // Chart configurations with dark theme support
+  const getChartLayout = (title, additionalConfig = {}) => ({
+    title: {
+      text: title,
+      font: {
+        color: themeMode === 'dark' ? '#f1f5f9' : '#1e293b',
+        size: 16,
+        family: 'Inter, sans-serif'
+      }
+    },
+    paper_bgcolor: 'transparent',
+    plot_bgcolor: 'transparent',
+    font: {
+      color: themeMode === 'dark' ? '#f1f5f9' : '#1e293b',
+      family: 'Inter, sans-serif'
+    },
+    xaxis: {
+      gridcolor: themeMode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+      color: themeMode === 'dark' ? '#94a3b8' : '#64748b',
+    },
+    yaxis: {
+      gridcolor: themeMode === 'dark' ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)',
+      color: themeMode === 'dark' ? '#94a3b8' : '#64748b',
+    },
+    ...additionalConfig
   });
 
   if (loading) {
     return (
       <ThemeProvider theme={theme}>
         <CssBaseline />
-        <div className="dashboard">
-          <Typography variant="h1" className="dashboard-title">
-            Data Visualization Dashboard
-          </Typography>
-          <CircularProgress style={{ display: 'block', margin: '0 auto' }} />
-        </div>
+        <LoadingSpinner message="Loading Dashboard..." />
       </ThemeProvider>
     );
   }
@@ -165,172 +303,222 @@ useEffect(() => {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <div className="dashboard-container">
-        <div className="sidebar">
-          <Typography variant="h4">Filters</Typography>
-          <div className="filter-container">
-            <FormControl>
-              <InputLabel>End Year</InputLabel>
-              <Select value={endYear} onChange={e => setEndYear(e.target.value)}>
-                {[...new Set(data.map(item => new Date(item.published).getFullYear()))].map(year => (
-                  <MenuItem key={year} value={year}>
-                    {year}
-                  </MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>Topic</InputLabel>
-<Select value={topic} onChange={e => setTopic(e.target.value)}>
-{[...new Set(data.map(item => item.topic))].map(topic => (
-<MenuItem key={topic} value={topic}>
-{topic}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>Sector</InputLabel>
-<Select value={sector} onChange={e => setSector(e.target.value)}>
-{[...new Set(data.map(item => item.sector))].map(sector => (
-<MenuItem key={sector} value={sector}>
-{sector}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>Region</InputLabel>
-<Select value={region} onChange={e => setRegion(e.target.value)}>
-{[...new Set(data.map(item => item.region))].map(region => (
-<MenuItem key={region} value={region}>
-{region}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>Pest</InputLabel>
-<Select value={pest} onChange={e => setPest(e.target.value)}>
-{[...new Set(data.map(item => item.pest))].map(pest => (
-<MenuItem key={pest} value={pest}>
-{pest}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>Source</InputLabel>
-<Select value={source} onChange={e => setSource(e.target.value)}>
-{[...new Set(data.map(item => item.source))].map(source => (
-<MenuItem key={source} value={source}>
-{source}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>SWOT</InputLabel>
-<Select value={swot} onChange={e => setSwot(e.target.value)}>
-{[...new Set(data.map(item => item.swot))].map(swot => (
-<MenuItem key={swot} value={swot}>
-{swot}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>Country</InputLabel>
-<Select value={country} onChange={e => setCountry(e.target.value)}>
-{[...new Set(data.map(item => item.country))].map(country => (
-<MenuItem key={country} value={country}>
-{country}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-<FormControl>
-<InputLabel>City</InputLabel>
-<Select value={city} onChange={e => setCity(e.target.value)}>
-{[...new Set(data.map(item => item.city))].map(city => (
-<MenuItem key={city} value={city}>
-{city}
-</MenuItem>
-))}
-</Select>
-</FormControl>
-</div>
-</div>
-<div className="main-content">
-<div className="navbar">
-<Typography variant="h1">Data Visualization Dashboard</Typography>
-<div className="theme-switch">
-<FormControlLabel
-control={<Switch checked={themeMode === 'dark'} onChange={handleThemeChange} />}
-label={themeMode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
-/>
-</div>
-</div>
-<div className="chart-container">
-<Typography variant="h2">Intensity by Year (Bar Chart)</Typography>
-<Plot
-data={[
-{
-x: years,
-y: intensities,
-type: 'bar',
-marker: { color: 'blue' },
-},
-]}
-layout={{ width: '100%', height: 400, title: 'Intensity by Year' }}
-/>
-</div>
-<div className="chart-container">
-<Typography variant="h2">Likelihood by Year (Pie Chart)</Typography>
-<Plot
-data={[
-{
-labels: years,
-values: likelihoods,
-type: 'pie',
-hole: 0.4,
-},
-]}
-layout={{ width: '100%', height: 400, title: 'Likelihood by Year' }}
-/>
-</div>
-<div className="chart-container">
-<Typography variant="h2">Relevance by Year (Bar Chart)</Typography>
-<Plot
-data={[
-{
-x: years,
-y: relevances,
-type: 'bar',
-marker: { color: 'green' },
-},
-]}
-layout={{ width: '100%', height: 400, title: 'Relevance by Year' }}
-/>
-</div>
-</div>
-</div>
-{error && (
-<Snackbar open={true} autoHideDuration={6000}>
-<Alert severity="error">Error fetching data. Please try again later.</Alert>
-</Snackbar>
-)}
-<Snackbar open={offlineOpen} autoHideDuration={6000} onClose={handleClose}>
-<Alert onClose={handleClose} severity="warning">
-You are offline. Some features may not be available.
-</Alert>
-</Snackbar>
-{slowConnection && (
-<Snackbar open={true} autoHideDuration={6000}>
-<Alert severity="info">Your connection is slow. Data may take longer to load.</Alert>
-</Snackbar>
-)}
-</ThemeProvider>
-);
+        <FilterPanel
+          data={data}
+          filters={filters}
+          onFilterChange={handleFilterChange}
+          onClearFilters={handleClearFilters}
+        />
+        
+        <div className="main-content">
+          {/* Modern Navbar */}
+          <div className="navbar">
+            <Typography variant="h1">
+              Data Visualization Dashboard
+            </Typography>
+            <div className="theme-switch">
+              <FormControlLabel
+                control={
+                  <Switch 
+                    checked={themeMode === 'dark'} 
+                    onChange={handleThemeChange}
+                    color="primary"
+                  />
+                }
+                label={themeMode === 'dark' ? <DarkModeIcon /> : <LightModeIcon />}
+              />
+            </div>
+          </div>
+
+          {/* Statistics Cards */}
+          <Box className="stats-grid">
+            <StatsCard
+              icon={<DataUsageIcon />}
+              value={statistics.totalRecords}
+              label="Total Records"
+            />
+            <StatsCard
+              icon={<TrendingUpIcon />}
+              value={statistics.avgIntensity}
+              label="Avg Intensity"
+            />
+            <StatsCard
+              icon={<AssessmentIcon />}
+              value={statistics.avgLikelihood}
+              label="Avg Likelihood"
+            />
+            <StatsCard
+              icon={<TimelineIcon />}
+              value={statistics.avgRelevance}
+              label="Avg Relevance"
+            />
+          </Box>
+
+          {/* Charts */}
+          <ChartContainer
+            title="Intensity by Year"
+            icon={<BarChartIcon />}
+          >
+            <Plot
+              data={[
+                {
+                  x: years,
+                  y: intensities,
+                  type: 'bar',
+                  marker: { 
+                    color: themeMode === 'dark' ? '#60a5fa' : '#3b82f6',
+                    line: {
+                      color: themeMode === 'dark' ? '#3b82f6' : '#1e40af',
+                      width: 1
+                    }
+                  },
+                  hovertemplate: '<b>Year:</b> %{x}<br><b>Intensity:</b> %{y}<extra></extra>',
+                },
+              ]}
+              layout={getChartLayout('', {
+                height: 400,
+                margin: { t: 20, r: 20, b: 40, l: 40 },
+              })}
+              config={{
+                displayModeBar: false,
+                responsive: true,
+              }}
+              style={{ width: '100%', height: '400px' }}
+            />
+          </ChartContainer>
+
+          <ChartContainer
+            title="Likelihood Distribution"
+            icon={<PieChartIcon />}
+          >
+            <Plot
+              data={[
+                {
+                  labels: years,
+                  values: likelihoods,
+                  type: 'pie',
+                  hole: 0.4,
+                  marker: {
+                    colors: themeMode === 'dark' 
+                      ? ['#60a5fa', '#a78bfa', '#34d399', '#fbbf24', '#f87171', '#fb7185']
+                      : ['#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ef4444', '#ec4899'],
+                  },
+                  hovertemplate: '<b>Year:</b> %{label}<br><b>Likelihood:</b> %{value}<br><b>Percentage:</b> %{percent}<extra></extra>',
+                },
+              ]}
+              layout={getChartLayout('', {
+                height: 400,
+                margin: { t: 20, r: 20, b: 20, l: 20 },
+                showlegend: true,
+                legend: {
+                  orientation: 'h',
+                  y: -0.1,
+                  x: 0.5,
+                  xanchor: 'center'
+                }
+              })}
+              config={{
+                displayModeBar: false,
+                responsive: true,
+              }}
+              style={{ width: '100%', height: '400px' }}
+            />
+          </ChartContainer>
+
+          <ChartContainer
+            title="Relevance Trends"
+            icon={<TimelineIcon />}
+          >
+            <Plot
+              data={[
+                {
+                  x: years,
+                  y: relevances,
+                  type: 'scatter',
+                  mode: 'lines+markers',
+                  marker: { 
+                    color: themeMode === 'dark' ? '#34d399' : '#10b981',
+                    size: 8,
+                    line: {
+                      color: themeMode === 'dark' ? '#059669' : '#047857',
+                      width: 2
+                    }
+                  },
+                  line: {
+                    color: themeMode === 'dark' ? '#34d399' : '#10b981',
+                    width: 3
+                  },
+                  hovertemplate: '<b>Year:</b> %{x}<br><b>Relevance:</b> %{y}<extra></extra>',
+                },
+              ]}
+              layout={getChartLayout('', {
+                height: 400,
+                margin: { t: 20, r: 20, b: 40, l: 40 },
+              })}
+              config={{
+                displayModeBar: false,
+                responsive: true,
+              }}
+              style={{ width: '100%', height: '400px' }}
+            />
+          </ChartContainer>
+
+          {/* Advanced Charts */}
+          <AdvancedCharts
+            data={filteredData}
+            themeMode={themeMode}
+          />
+
+          {/* Data Table */}
+          <DataTable
+            data={filteredData}
+            title="Detailed Data View"
+          />
+        </div>
+      </div>
+
+      {/* Scroll to Top Button */}
+      <Zoom in={showScrollTop}>
+        <Fab
+          color="primary"
+          size="medium"
+          onClick={scrollToTop}
+          sx={{
+            position: 'fixed',
+            bottom: 24,
+            right: 24,
+            zIndex: 1000,
+            backdropFilter: 'blur(16px)',
+            backgroundColor: 'rgba(59, 130, 246, 0.8)',
+            '&:hover': {
+              backgroundColor: 'rgba(59, 130, 246, 0.9)',
+            },
+          }}
+        >
+          <KeyboardArrowUpIcon />
+        </Fab>
+      </Zoom>
+
+      {/* Notifications */}
+      {error && (
+        <Snackbar open={true} autoHideDuration={6000}>
+          <Alert severity="error">Error fetching data. Please try again later.</Alert>
+        </Snackbar>
+      )}
+      
+      <Snackbar open={offlineOpen} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="warning">
+          You are offline. Some features may not be available.
+        </Alert>
+      </Snackbar>
+      
+      {slowConnection && (
+        <Snackbar open={true} autoHideDuration={6000}>
+          <Alert severity="info">Your connection is slow. Data may take longer to load.</Alert>
+        </Snackbar>
+      )}
+    </ThemeProvider>
+  );
 };
 
 export default Dashboard;
