@@ -1,0 +1,147 @@
+/* Reset CSS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f4f6f9;
+  color: #333;
+}
+
+.dashboard-container {
+  display: flex;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 250px;
+  padding: 20px;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+.main-content {
+  flex: 1;
+}
+
+.dashboard-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.filter-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-container .MuiFormControl-root {
+  flex: 1;
+}
+
+.chart-container {
+  margin-bottom: 40px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.chart-container:hover {
+  transform: scale(1.02);
+}
+
+.chart-container h2 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #333;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background: #4e54c8;
+  color: #fff;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.navbar h1 {
+  font-size: 1.5rem;
+}
+
+.navbar .theme-switch {
+  display: flex;
+  align-items: center;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+      flex-direction: column;
+  }
+
+  .sidebar {
+      width: 100%;
+      margin-right: 0;
+      margin-bottom: 20px;
+  }
+
+  .filter-container {
+      display: none;
+  }
+
+  .theme-switch {
+      display: none;
+  }
+}
+
+
+.chart-container {
+  overflow-x: auto; /* Allow horizontal scrolling */
+  margin: 20px 0; /* Spacing between charts */
+  min-width: 300px; /* Minimum width for mobile view */
+  max-width: 100%; /* Full width */
+}
+
+@media (max-width: 600px) {
+  .chart-container {
+    width: 100%; /* Full width on mobile */
+  }
+}
+.filter-container {
+  background-color: var(--filter-background); /* Use CSS variables for flexibility */
+  color: var(--filter-text-color);
+}
+
+/* Light theme colors */
+body.light {
+  --filter-background: #f0f0f0;
+  --filter-text-color: #333;
+}
+
+/* Dark theme colors */
+body.dark {
+  --filter-background: #333;
+  --filter-text-color: #f0f0f0;
+}
+h4{
+  color: purple;
+}

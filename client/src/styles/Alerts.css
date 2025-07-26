@@ -1,0 +1,17 @@
+/* Adjusting the styling for Alerts component */
+.snackbar {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1400; /* Ensures it stays on top of other elements */
+  }
+  
+  .alert {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
