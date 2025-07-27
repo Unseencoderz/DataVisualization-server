@@ -58,7 +58,7 @@ _Transform your data into stunning visual insights with our modern, responsive d
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
-![Netlify](https://img.shields.io/netlify/:6c41934f-06fb-4ce6-8ddb-d22ac847eb7d)
+![Netlify](https://img.shields.io/netlify/6c41934f-06fb-4ce6-8ddb-d22ac847eb7d)
 
 </div>
 
