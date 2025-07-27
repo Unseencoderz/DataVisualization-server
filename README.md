@@ -675,7 +675,7 @@ SOFTWARE.
 </a>
 </td>
 <td align="center">
-<a href="https://github.com/yourusername">
+<a href="https://github.com/Unseencoderz">
 <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
 </a>
 </td>
@@ -689,8 +689,8 @@ SOFTWARE.
 
 ### **🐛 Bug Reports & Feature Requests**
 
-[![GitHub Issues](https://img.shields.io/github/issues/yourusername/dataviz-pro-dashboard?style=for-the-badge&logo=github)](https://github.com/yourusername/dataviz-pro-dashboard/issues)
-[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?style=for-the-badge&logo=github)](https://github.com/yourusername/dataviz-pro-dashboard/discussions)
+[![GitHub Issues](https://img.shields.io/github/issues/yourusername/dataviz-pro-dashboard?style=for-the-badge&logo=github)](https://github.com/Unseencoderz/DataVisualization-server/issues)
+[![GitHub Discussions](https://img.shields.io/badge/GitHub-Discussions-181717?style=for-the-badge&logo=github)](https://github.com/Unseencoderz/DataVisualization-server/discussions)
 
 </div>
 
