@@ -604,13 +604,15 @@ When reporting issues, please include:
 
 ### **🌟 Hall of Fame**
 
-Thanks to all the amazing contributors who made this project possible!
+### 🌟 **Hall of Fame**
 
-<a href="https://github.com/Unseencoderz/DataVisualization-server.git/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Unseencoderz/DataVisualization-server" />
+This project is proudly built and maintained solo with 💻❤️ by [@Unseencoderz](https://github.com/Unseencoderz).
+
+<a href="https://github.com/Unseencoderz/DataVisualization-server">
+  <img src="https://contrib.rocks/image?repo=Unseencoderz/DataVisualization-server" alt="Unseencoderz contribution graph"/>
 </a>
 
-_Made with [contrib.rocks](https://contrib.rocks)._
+_Made with [contrib.rocks](https://contrib.rocks) — though it’s a solo act, every commit counts!_
 
 </div>
 
