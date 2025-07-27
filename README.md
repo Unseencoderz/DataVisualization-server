@@ -2,7 +2,7 @@
 
 # 📊 **Data Vizualization Dashboard** ✨
 
-[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Now-2ea44f?style=for-the-badge)](https://your-demo-link.com)
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Now-2ea44f?style=for-the-badge)](https://datavizualization-dashboard.netlify.app/)
 [![GitHub Stars](https://img.shields.io/github/stars/yourusername/dataviz-pro?style=for-the-badge&logo=github&color=yellow)](https://github.com/yourusername/dataviz-pro/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
@@ -82,8 +82,8 @@ Make sure you have the following installed:
 
 ```bash
 # 1️⃣ Clone the repository
-git clone https://github.com/yourusername/dataviz-pro-dashboard.git
-cd dataviz-pro-dashboard
+git clone https://github.com/Unseencoderz/DataVisualization-server.git
+cd DataVisualization-server
 
 # 2️⃣ Install server dependencies
 cd server
@@ -220,7 +220,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 
 ### **Desktop Dashboard**
 
-![Desktop Dashboard](https://via.placeholder.com/1200x700/667eea/ffffff?text=DesktopDashboardView)
+![Desktop Dashboard](./demo_images/Screenshot%202025-07-27%20065106.png)
 
 ### **Mobile Responsive**
 
@@ -230,7 +230,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 
 ### **Dark Mode**
 
-![Dark Mode](https://via.placeholder.com/1200x700/1a1a2e/ffffff?text=DarkModeDashboard)
+![Dark Mode](./demo_images/Screenshot%202025-07-27%20065106.png)
 
 </details>
 
@@ -239,15 +239,15 @@ RATE_LIMIT_MAX_REQUESTS=100
 
 ### **3D Scatter Plot**
 
-![3D Scatter Plot](https://via.placeholder.com/800x500/667eea/ffffff?text=3DScatterPlot)
+![3D Scatter Plot](./demo_images/Screenshot%202025-07-27%20065147.png)
 
 ### **Interactive Heatmap**
 
-![Heatmap](https://via.placeholder.com/800x500/a78bfa/ffffff?text=InteractiveHeatmap)
+![Heatmap](./demo_images/Screenshot%202025-07-27%20065206.png)
 
 ### **Statistics Cards**
 
-![Stats Cards](https://via.placeholder.com/800x300/34d399/ffffff?text=StatisticsCardswithGlassmorphism)
+![Stats Cards](./demo_images/Screenshot%202025-07-27%20065106.png)
 
 </details>
 
@@ -372,7 +372,7 @@ headers: {
 <summary><b>🏗️ Folder Organization</b></summary>
 
 ```
-📦 dataviz-pro-dashboard/
+📦 /DataVisualization-server
 ├── 📁 client/                          # Frontend React Application
 │   ├── 📁 public/
 │   │   ├── 📄 index.html
@@ -540,7 +540,7 @@ Displays the proportion of records by sector.
 ```bash
 # 1. Fork the repository
 # 2. Clone your fork
-git clone https://github.com/YOUR_USERNAME/dataviz-pro-dashboard.git
+git clone https://github.com/Unseencoderz/DataVisualization-server.git
 
 # 3. Create a feature branch
 git checkout -b feature/amazing-feature
@@ -606,8 +606,8 @@ When reporting issues, please include:
 
 Thanks to all the amazing contributors who made this project possible!
 
-<a href="https://github.com/yourusername/dataviz-pro-dashboard/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=yourusername/dataviz-pro-dashboard" />
+<a href="https://github.com/Unseencoderz/DataVisualization-server.git/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=Unseencoderz/DataVisualization-server" />
 </a>
 
 _Made with [contrib.rocks](https://contrib.rocks)._
@@ -660,12 +660,12 @@ SOFTWARE.
 <table>
 <tr>
 <td align="center">
-<a href="mailto:your.email@example.com">
+<a href="mailto:sahilgautam0097@example.com">
 <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
 </a>
 </td>
 <td align="center">
-<a href="https://linkedin.com/in/yourprofile">
+<a href="https://www.linkedin.com/in/sahil-gautam-996155268/">
 <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
 </a>
 </td>
@@ -702,14 +702,14 @@ SOFTWARE.
 
 If this project helped you, please consider giving it a ⭐ on GitHub!
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/dataviz-pro-dashboard?style=social)](https://github.com/yourusername/dataviz-pro-dashboard/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/dataviz-pro-dashboard?style=social)](https://github.com/yourusername/dataviz-pro-dashboard/network/members)
-[![GitHub watchers](https://img.shields.io/github/watchers/yourusername/dataviz-pro-dashboard?style=social)](https://github.com/yourusername/dataviz-pro-dashboard/watchers)
+[![GitHub stars](https://img.shields.io/github/stars/Unseencoderz/DataVisualization-server?style=social)](https://github.com/Unseencoderz/DataVisualization-server/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Unseencoderz/DataVisualization-server?style=social)](https://github.com/Unseencoderz/DataVisualization-server/network/members)
+[![GitHub watchers](https://img.shields.io/github/watchers/Unseencoderz/DataVisualization-server?style=social)](https://github.com//Unseencoderz/DataVisualization-server/watchers)
 
 ---
 
 <p>
-<i>Built with ❤️ by the DataViz Pro team</i>
+<i>Built with ❤️ by Sahil gautam</i>
 </p>
 
 <p>
