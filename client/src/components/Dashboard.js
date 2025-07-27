@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Plot from 'react-plotly.js';
 import {
   Snackbar,
@@ -150,7 +149,7 @@ const Dashboard = () => {
 
   const { years, intensities, likelihoods, relevances } = transformDataForCharts(filteredData);
 
-  const applyFilters = () => {
+  const applyFilters = useCallback(() => {
     let filtered = data;
 
     Object.entries(filters).forEach(([key, value]) => {
@@ -164,11 +163,11 @@ const Dashboard = () => {
     });
 
     setFilteredData(filtered);
-  };
+  }, [data, filters]);
 
   useEffect(() => {
     applyFilters();
-  }, [filters, data]);
+  }, [applyFilters]);
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({
