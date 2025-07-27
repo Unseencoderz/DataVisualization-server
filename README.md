@@ -3,11 +3,11 @@
 # 📊 **Data Vizualization Dashboard** ✨
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Now-2ea44f?style=for-the-badge)](https://datavizualization-dashboard.netlify.app/)
-[![GitHub Stars](https://img.shields.io/github/stars/yourusername/dataviz-pro?style=for-the-badge&logo=github&color=yellow)](https://github.com/yourusername/dataviz-pro/stargazers)
+[![GitHub Stars](https://img.shields.io/github/stars/Unseencoderz/DataVisualization-server?style=for-the-badge&logo=github&color=yellow)](https://github.com/yourusername/dataviz-pro/stargazers)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)](http://makeapullrequest.com)
 
-![Project Banner](https://via.placeholder.com/1200x400/667eea/ffffff?text=DataVizProDashboard)
+![Project Banner](./demo_images/Screenshot%202025-07-27%20065106.png)
 
 _Transform your data into stunning visual insights with our modern, responsive dashboard featuring glassmorphism design, dark mode, and advanced 3D visualizations._
 
@@ -58,7 +58,7 @@ _Transform your data into stunning visual insights with our modern, responsive d
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
 ![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visual-studio-code&logoColor=white)
 ![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
-![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
+![Netlify](https://img.shields.io/netlify/:6c41934f-06fb-4ce6-8ddb-d22ac847eb7d)
 
 </div>
 
@@ -225,7 +225,7 @@ RATE_LIMIT_MAX_REQUESTS=100
 ### **Mobile Responsive**
 
 <div align="center">
-<img src="https://via.placeholder.com/300x600/667eea/ffffff?text=MobileView" alt="Mobile View" width="300">
+<img src="./demo_images/image.png" alt="Mobile View" width="300">
 </div>
 
 ### **Dark Mode**
@@ -660,7 +660,7 @@ SOFTWARE.
 <table>
 <tr>
 <td align="center">
-<a href="mailto:sahilgautam0097@example.com">
+<a href="mailto:gautamsahil.dev@gmail.com">
 <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Email"/>
 </a>
 </td>
@@ -713,7 +713,7 @@ If this project helped you, please consider giving it a ⭐ on GitHub!
 </p>
 
 <p>
-<sub>© 2024 DataViz Pro Dashboard. All rights reserved.</sub>
+<sub>© 2024 DataVisualization-server Pro Dashboard. All rights reserved.</sub>
 </p>
 
 </div>
