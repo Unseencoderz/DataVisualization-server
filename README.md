@@ -604,8 +604,6 @@ When reporting issues, please include:
 
 ### **🌟 Hall of Fame**
 
-### 🌟 **Hall of Fame**
-
 This project is proudly built and maintained solo with 💻❤️ by [@Unseencoderz](https://github.com/Unseencoderz).
 
 <a href="https://github.com/Unseencoderz/DataVisualization-server">
